@@ -21,8 +21,13 @@ export interface StaticBook {
   genres: { id: number; name: string; slug: string }[];
 }
 
-const cover = (title: string) =>
-  `https://placehold.co/400x600/1a1a2e/e0d5c1?text=${encodeURIComponent(
+/** Open Library high-res cover by ISBN */
+const ol = (isbn: string) =>
+  `https://covers.openlibrary.org/b/isbn/${isbn}-L.jpg`;
+
+/** Fallback: beautiful gradient cover via placehold */
+const grad = (title: string, color = "1a1a2e") =>
+  `https://placehold.co/400x600/${color}/e0d5c1?text=${encodeURIComponent(
     title.split(" ").slice(0, 3).join("\n")
   )}&font=playfair-display`;
 
@@ -34,7 +39,7 @@ export const STATIC_BOOKS: StaticBook[] = [
     isbn: "9780441013593",
     description:
       "Set on the desert planet Arrakis, Dune is the story of Paul Atreides, who would become the mysterious man known as Muad'Dib. A sweeping tale of politics, ecology, religion, and human potential.",
-    coverUrl: cover("Dune"),
+    coverUrl: ol("9780441013593"),
     language: "English",
     pageCount: 688,
     publishedYear: 1965,
@@ -43,7 +48,10 @@ export const STATIC_BOOKS: StaticBook[] = [
     availableCopies: 3,
     tags: ["epic", "desert", "politics", "ecology"],
     authors: [{ id: 1, name: "Frank Herbert" }],
-    genres: [{ id: 1, name: "Science Fiction", slug: "sci-fi" }, { id: 2, name: "Fiction", slug: "fiction" }],
+    genres: [
+      { id: 1, name: "Science Fiction", slug: "sci-fi" },
+      { id: 2, name: "Fiction", slug: "fiction" },
+    ],
   },
   {
     id: "b1a11111-1111-1111-1111-111111111102",
@@ -51,7 +59,7 @@ export const STATIC_BOOKS: StaticBook[] = [
     isbn: "9780451524935",
     description:
       "A dystopian novel set in a totalitarian society ruled by Big Brother. A masterpiece of political fiction and a terrifying vision of a future where freedom is an illusion.",
-    coverUrl: cover("1984"),
+    coverUrl: ol("9780451524935"),
     language: "English",
     pageCount: 328,
     publishedYear: 1949,
@@ -60,7 +68,10 @@ export const STATIC_BOOKS: StaticBook[] = [
     availableCopies: 4,
     tags: ["dystopia", "surveillance", "totalitarian", "classic"],
     authors: [{ id: 2, name: "George Orwell" }],
-    genres: [{ id: 2, name: "Fiction", slug: "fiction" }, { id: 3, name: "Classic", slug: "classic" }],
+    genres: [
+      { id: 2, name: "Fiction", slug: "fiction" },
+      { id: 3, name: "Classic", slug: "classic" },
+    ],
   },
   {
     id: "b1a11111-1111-1111-1111-111111111103",
@@ -68,7 +79,7 @@ export const STATIC_BOOKS: StaticBook[] = [
     isbn: "9780141439518",
     description:
       "A witty comedy of manners that follows the Bennet sisters as they navigate love, society, and personal growth in Regency-era England.",
-    coverUrl: cover("Pride and Prejudice"),
+    coverUrl: ol("9780141439518"),
     language: "English",
     pageCount: 432,
     publishedYear: 1813,
@@ -77,7 +88,10 @@ export const STATIC_BOOKS: StaticBook[] = [
     availableCopies: 3,
     tags: ["romance", "society", "regency", "classic"],
     authors: [{ id: 3, name: "Jane Austen" }],
-    genres: [{ id: 2, name: "Fiction", slug: "fiction" }, { id: 4, name: "Romance", slug: "romance" }],
+    genres: [
+      { id: 2, name: "Fiction", slug: "fiction" },
+      { id: 4, name: "Romance", slug: "romance" },
+    ],
   },
   {
     id: "b1a11111-1111-1111-1111-111111111104",
@@ -86,7 +100,7 @@ export const STATIC_BOOKS: StaticBook[] = [
     isbn: "9780062316097",
     description:
       "A groundbreaking narrative that surveys the entire length of human history, from the Stone Age to the Silicon Age.",
-    coverUrl: cover("Sapiens"),
+    coverUrl: ol("9780062316097"),
     language: "English",
     pageCount: 464,
     publishedYear: 2011,
@@ -95,7 +109,10 @@ export const STATIC_BOOKS: StaticBook[] = [
     availableCopies: 3,
     tags: ["history", "anthropology", "evolution", "civilization"],
     authors: [{ id: 4, name: "Yuval Noah Harari" }],
-    genres: [{ id: 5, name: "Non-Fiction", slug: "non-fiction" }, { id: 6, name: "History", slug: "history" }],
+    genres: [
+      { id: 5, name: "Non-Fiction", slug: "non-fiction" },
+      { id: 6, name: "History", slug: "history" },
+    ],
   },
   {
     id: "b1a11111-1111-1111-1111-111111111105",
@@ -104,7 +121,7 @@ export const STATIC_BOOKS: StaticBook[] = [
     isbn: "9780735211292",
     description:
       "A practical guide that reveals how small behavioral changes can lead to remarkable results. Backed by scientific research on habit formation.",
-    coverUrl: cover("Atomic Habits"),
+    coverUrl: ol("9780735211292"),
     language: "English",
     pageCount: 320,
     publishedYear: 2018,
@@ -113,7 +130,10 @@ export const STATIC_BOOKS: StaticBook[] = [
     availableCopies: 5,
     tags: ["habits", "productivity", "psychology", "self-improvement"],
     authors: [{ id: 5, name: "James Clear" }],
-    genres: [{ id: 5, name: "Non-Fiction", slug: "non-fiction" }, { id: 7, name: "Self-Help", slug: "self-help" }],
+    genres: [
+      { id: 5, name: "Non-Fiction", slug: "non-fiction" },
+      { id: 7, name: "Self-Help", slug: "self-help" },
+    ],
   },
   {
     id: "b1a11111-1111-1111-1111-111111111106",
@@ -122,7 +142,7 @@ export const STATIC_BOOKS: StaticBook[] = [
     isbn: "9780399590504",
     description:
       "A memoir about a young woman who grows up in a survivalist family in rural Idaho and eventually earns a PhD from Cambridge University.",
-    coverUrl: cover("Educated"),
+    coverUrl: ol("9780399590504"),
     language: "English",
     pageCount: 334,
     publishedYear: 2018,
@@ -131,7 +151,10 @@ export const STATIC_BOOKS: StaticBook[] = [
     availableCopies: 2,
     tags: ["memoir", "education", "resilience", "family"],
     authors: [{ id: 6, name: "Tara Westover" }],
-    genres: [{ id: 5, name: "Non-Fiction", slug: "non-fiction" }, { id: 8, name: "Biography", slug: "biography" }],
+    genres: [
+      { id: 5, name: "Non-Fiction", slug: "non-fiction" },
+      { id: 8, name: "Biography", slug: "biography" },
+    ],
   },
   {
     id: "b1a11111-1111-1111-1111-111111111107",
@@ -139,7 +162,7 @@ export const STATIC_BOOKS: StaticBook[] = [
     isbn: "9781524763138",
     description:
       "An intimate and powerful memoir by the former First Lady of the United States, chronicling her journey from the South Side of Chicago to the White House.",
-    coverUrl: cover("Becoming"),
+    coverUrl: ol("9781524763138"),
     language: "English",
     pageCount: 448,
     publishedYear: 2018,
@@ -148,7 +171,10 @@ export const STATIC_BOOKS: StaticBook[] = [
     availableCopies: 3,
     tags: ["memoir", "inspiration", "politics", "leadership"],
     authors: [{ id: 7, name: "Michelle Obama" }],
-    genres: [{ id: 5, name: "Non-Fiction", slug: "non-fiction" }, { id: 8, name: "Biography", slug: "biography" }],
+    genres: [
+      { id: 5, name: "Non-Fiction", slug: "non-fiction" },
+      { id: 8, name: "Biography", slug: "biography" },
+    ],
   },
   {
     id: "b1a11111-1111-1111-1111-111111111108",
@@ -156,7 +182,7 @@ export const STATIC_BOOKS: StaticBook[] = [
     isbn: "9780735219090",
     description:
       "A coming-of-age story set in the marshlands of North Carolina, blending a murder mystery with a love story and a celebration of the natural world.",
-    coverUrl: cover("Where the Crawdads Sing"),
+    coverUrl: ol("9780735219090"),
     language: "English",
     pageCount: 368,
     publishedYear: 2018,
@@ -165,7 +191,10 @@ export const STATIC_BOOKS: StaticBook[] = [
     availableCopies: 3,
     tags: ["mystery", "nature", "coming-of-age", "romance"],
     authors: [{ id: 8, name: "Delia Owens" }],
-    genres: [{ id: 2, name: "Fiction", slug: "fiction" }, { id: 9, name: "Mystery", slug: "mystery" }],
+    genres: [
+      { id: 2, name: "Fiction", slug: "fiction" },
+      { id: 9, name: "Mystery", slug: "mystery" },
+    ],
   },
   {
     id: "b1a11111-1111-1111-1111-111111111109",
@@ -173,7 +202,7 @@ export const STATIC_BOOKS: StaticBook[] = [
     isbn: "9780553418026",
     description:
       "Stranded on Mars with no way to signal Earth, astronaut Mark Watney must draw on his ingenuity and spirit to survive. A celebration of human resilience and science.",
-    coverUrl: cover("The Martian"),
+    coverUrl: ol("9780553418026"),
     language: "English",
     pageCount: 369,
     publishedYear: 2011,
@@ -182,15 +211,18 @@ export const STATIC_BOOKS: StaticBook[] = [
     availableCopies: 2,
     tags: ["survival", "mars", "science", "humor"],
     authors: [{ id: 9, name: "Andy Weir" }],
-    genres: [{ id: 1, name: "Science Fiction", slug: "sci-fi" }, { id: 2, name: "Fiction", slug: "fiction" }],
+    genres: [
+      { id: 1, name: "Science Fiction", slug: "sci-fi" },
+      { id: 2, name: "Fiction", slug: "fiction" },
+    ],
   },
   {
     id: "b1a11111-1111-1111-1111-111111111110",
     title: "Circe",
     isbn: "9780316556347",
     description:
-      "A retelling of the story of Circe, the enchantress from Greek mythology who transforms Odysseus's men into pigs. A tale of love, loss, and self-discovery.",
-    coverUrl: cover("Circe"),
+      "A retelling of the story of Circe, the enchantress from Greek mythology. A tale of love, loss, and self-discovery.",
+    coverUrl: ol("9780316556347"),
     language: "English",
     pageCount: 393,
     publishedYear: 2018,
@@ -199,7 +231,10 @@ export const STATIC_BOOKS: StaticBook[] = [
     availableCopies: 2,
     tags: ["mythology", "feminism", "gods", "transformation"],
     authors: [{ id: 10, name: "Madeline Miller" }],
-    genres: [{ id: 2, name: "Fiction", slug: "fiction" }, { id: 10, name: "Fantasy", slug: "fantasy" }],
+    genres: [
+      { id: 2, name: "Fiction", slug: "fiction" },
+      { id: 10, name: "Fantasy", slug: "fantasy" },
+    ],
   },
   {
     id: "b1a11111-1111-1111-1111-111111111111",
@@ -207,7 +242,7 @@ export const STATIC_BOOKS: StaticBook[] = [
     isbn: "9780062073488",
     description:
       "Ten strangers are lured to an isolated island, and one by one they begin to die. Agatha Christie's masterpiece of suspense.",
-    coverUrl: cover("And Then There Were None"),
+    coverUrl: ol("9780062073488"),
     language: "English",
     pageCount: 272,
     publishedYear: 1939,
@@ -216,7 +251,10 @@ export const STATIC_BOOKS: StaticBook[] = [
     availableCopies: 3,
     tags: ["mystery", "island", "suspense", "classic"],
     authors: [{ id: 11, name: "Agatha Christie" }],
-    genres: [{ id: 9, name: "Mystery", slug: "mystery" }, { id: 3, name: "Classic", slug: "classic" }],
+    genres: [
+      { id: 9, name: "Mystery", slug: "mystery" },
+      { id: 3, name: "Classic", slug: "classic" },
+    ],
   },
   {
     id: "b1a11111-1111-1111-1111-111111111112",
@@ -224,7 +262,7 @@ export const STATIC_BOOKS: StaticBook[] = [
     isbn: "9780553293357",
     description:
       "A mathematician devises a plan to preserve knowledge as the galactic empire crumbles. The first novel in Asimov's epic Foundation series.",
-    coverUrl: cover("Foundation"),
+    coverUrl: ol("9780553293357"),
     language: "English",
     pageCount: 244,
     publishedYear: 1951,
@@ -233,7 +271,10 @@ export const STATIC_BOOKS: StaticBook[] = [
     availableCopies: 2,
     tags: ["galactic empire", "psychohistory", "science", "epic"],
     authors: [{ id: 12, name: "Isaac Asimov" }],
-    genres: [{ id: 1, name: "Science Fiction", slug: "sci-fi" }, { id: 3, name: "Classic", slug: "classic" }],
+    genres: [
+      { id: 1, name: "Science Fiction", slug: "sci-fi" },
+      { id: 3, name: "Classic", slug: "classic" },
+    ],
   },
   {
     id: "b1a11111-1111-1111-1111-111111111113",
@@ -241,7 +282,7 @@ export const STATIC_BOOKS: StaticBook[] = [
     isbn: "9780345539434",
     description:
       "A journey through 15 billion years of cosmic evolution, exploring the origins of life and the human species. Carl Sagan's magnum opus.",
-    coverUrl: cover("Cosmos"),
+    coverUrl: ol("9780345539434"),
     language: "English",
     pageCount: 396,
     publishedYear: 1980,
@@ -250,15 +291,18 @@ export const STATIC_BOOKS: StaticBook[] = [
     availableCopies: 2,
     tags: ["astronomy", "space", "universe", "science"],
     authors: [{ id: 16, name: "Carl Sagan" }],
-    genres: [{ id: 5, name: "Non-Fiction", slug: "non-fiction" }, { id: 11, name: "Science", slug: "science" }],
+    genres: [
+      { id: 5, name: "Non-Fiction", slug: "non-fiction" },
+      { id: 11, name: "Science", slug: "science" },
+    ],
   },
   {
     id: "b1a11111-1111-1111-1111-111111111114",
     title: "The Hitchhiker's Guide to the Galaxy",
     isbn: "9780345391803",
     description:
-      "Seconds before Earth is demolished to make way for a galactic bypass, Arthur Dent is rescued by his friend Ford Prefect. A hilarious space odyssey.",
-    coverUrl: cover("Hitchhiker's Guide"),
+      "Seconds before Earth is demolished to make way for a galactic bypass, Arthur Dent is rescued. A hilarious, beloved space odyssey.",
+    coverUrl: ol("9780345391803"),
     language: "English",
     pageCount: 224,
     publishedYear: 1979,
@@ -267,7 +311,10 @@ export const STATIC_BOOKS: StaticBook[] = [
     availableCopies: 3,
     tags: ["humor", "space", "adventure", "absurd"],
     authors: [{ id: 18, name: "Douglas Adams" }],
-    genres: [{ id: 1, name: "Science Fiction", slug: "sci-fi" }, { id: 2, name: "Fiction", slug: "fiction" }],
+    genres: [
+      { id: 1, name: "Science Fiction", slug: "sci-fi" },
+      { id: 2, name: "Fiction", slug: "fiction" },
+    ],
   },
   {
     id: "b1a11111-1111-1111-1111-111111111115",
@@ -275,7 +322,7 @@ export const STATIC_BOOKS: StaticBook[] = [
     isbn: "9780547928227",
     description:
       "Bilbo Baggins, a comfort-loving hobbit, is swept into an epic quest to reclaim the dwarf kingdom of Erebor from the fearsome dragon Smaug.",
-    coverUrl: cover("The Hobbit"),
+    coverUrl: ol("9780547928227"),
     language: "English",
     pageCount: 310,
     publishedYear: 1937,
@@ -284,7 +331,10 @@ export const STATIC_BOOKS: StaticBook[] = [
     availableCopies: 4,
     tags: ["adventure", "dragon", "quest", "classic"],
     authors: [{ id: 20, name: "J.R.R. Tolkien" }],
-    genres: [{ id: 10, name: "Fantasy", slug: "fantasy" }, { id: 3, name: "Classic", slug: "classic" }],
+    genres: [
+      { id: 10, name: "Fantasy", slug: "fantasy" },
+      { id: 3, name: "Classic", slug: "classic" },
+    ],
   },
   {
     id: "b1a11111-1111-1111-1111-111111111116",
@@ -292,7 +342,7 @@ export const STATIC_BOOKS: StaticBook[] = [
     isbn: "9780807014295",
     description:
       "A psychiatrist's memoir of life in Nazi death camps, and how the experience led to his theory that the primary human drive is the search for meaning.",
-    coverUrl: cover("Man's Search for Meaning"),
+    coverUrl: ol("9780807014295"),
     language: "English",
     pageCount: 184,
     publishedYear: 1946,
@@ -301,7 +351,10 @@ export const STATIC_BOOKS: StaticBook[] = [
     availableCopies: 3,
     tags: ["holocaust", "meaning", "psychology", "resilience"],
     authors: [{ id: 21, name: "Viktor Frankl" }],
-    genres: [{ id: 5, name: "Non-Fiction", slug: "non-fiction" }, { id: 12, name: "Philosophy", slug: "philosophy" }],
+    genres: [
+      { id: 5, name: "Non-Fiction", slug: "non-fiction" },
+      { id: 12, name: "Philosophy", slug: "philosophy" },
+    ],
   },
   {
     id: "b1a11111-1111-1111-1111-111111111117",
@@ -309,7 +362,7 @@ export const STATIC_BOOKS: StaticBook[] = [
     isbn: "9780062315007",
     description:
       "A shepherd boy named Santiago travels from Spain to Egypt searching for treasure, discovering that the real treasure lies within.",
-    coverUrl: cover("The Alchemist"),
+    coverUrl: ol("9780062315007"),
     language: "English",
     pageCount: 197,
     publishedYear: 1988,
@@ -318,7 +371,10 @@ export const STATIC_BOOKS: StaticBook[] = [
     availableCopies: 4,
     tags: ["journey", "destiny", "spirituality", "fable"],
     authors: [{ id: 22, name: "Paulo Coelho" }],
-    genres: [{ id: 2, name: "Fiction", slug: "fiction" }, { id: 12, name: "Philosophy", slug: "philosophy" }],
+    genres: [
+      { id: 2, name: "Fiction", slug: "fiction" },
+      { id: 12, name: "Philosophy", slug: "philosophy" },
+    ],
   },
   {
     id: "b1a11111-1111-1111-1111-111111111118",
@@ -326,7 +382,7 @@ export const STATIC_BOOKS: StaticBook[] = [
     isbn: "9781451673319",
     description:
       "In a future where books are banned and burned, fireman Guy Montag begins to question everything he knows about his society.",
-    coverUrl: cover("Fahrenheit 451"),
+    coverUrl: ol("9781451673319"),
     language: "English",
     pageCount: 194,
     publishedYear: 1953,
@@ -335,7 +391,10 @@ export const STATIC_BOOKS: StaticBook[] = [
     availableCopies: 3,
     tags: ["censorship", "dystopia", "books", "freedom"],
     authors: [{ id: 23, name: "Ray Bradbury" }],
-    genres: [{ id: 1, name: "Science Fiction", slug: "sci-fi" }, { id: 3, name: "Classic", slug: "classic" }],
+    genres: [
+      { id: 1, name: "Science Fiction", slug: "sci-fi" },
+      { id: 3, name: "Classic", slug: "classic" },
+    ],
   },
   {
     id: "b1a11111-1111-1111-1111-111111111119",
@@ -343,7 +402,7 @@ export const STATIC_BOOKS: StaticBook[] = [
     isbn: "9781400031702",
     description:
       "A group of elite classics students at a small Vermont college become involved in a murder. A dark academic thriller about obsession and moral decay.",
-    coverUrl: cover("The Secret History"),
+    coverUrl: ol("9781400031702"),
     language: "English",
     pageCount: 559,
     publishedYear: 1992,
@@ -352,15 +411,18 @@ export const STATIC_BOOKS: StaticBook[] = [
     availableCopies: 2,
     tags: ["dark academia", "murder", "obsession", "college"],
     authors: [{ id: 26, name: "Donna Tartt" }],
-    genres: [{ id: 2, name: "Fiction", slug: "fiction" }, { id: 9, name: "Mystery", slug: "mystery" }],
+    genres: [
+      { id: 2, name: "Fiction", slug: "fiction" },
+      { id: 9, name: "Mystery", slug: "mystery" },
+    ],
   },
   {
     id: "b1a11111-1111-1111-1111-111111111120",
     title: "Project Hail Mary",
     isbn: "9780593135204",
     description:
-      "An astronaut wakes up alone on a spaceship with no memory, and must save Earth from an extinction-level threat. A thrilling space adventure.",
-    coverUrl: cover("Project Hail Mary"),
+      "An astronaut wakes up alone on a spaceship with no memory, and must save Earth from an extinction-level threat.",
+    coverUrl: ol("9780593135204"),
     language: "English",
     pageCount: 476,
     publishedYear: 2021,
@@ -369,6 +431,9 @@ export const STATIC_BOOKS: StaticBook[] = [
     availableCopies: 3,
     tags: ["space", "survival", "science", "friendship"],
     authors: [{ id: 9, name: "Andy Weir" }],
-    genres: [{ id: 1, name: "Science Fiction", slug: "sci-fi" }, { id: 2, name: "Fiction", slug: "fiction" }],
+    genres: [
+      { id: 1, name: "Science Fiction", slug: "sci-fi" },
+      { id: 2, name: "Fiction", slug: "fiction" },
+    ],
   },
 ];

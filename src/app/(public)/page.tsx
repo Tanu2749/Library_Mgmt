@@ -19,9 +19,11 @@ export default async function HomePage() {
   const featuredBooks = await getFeaturedBooks(8);
 
   return (
-    <div className="space-y-16 pb-12">
+    <div className="space-y-20 pb-16">
       {/* ─── Hero Section ─── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-12">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-14 relative">
+        {/* Animated gradient backdrop */}
+        <div className="absolute inset-0 hero-gradient pointer-events-none rounded-3xl" />
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* Left Hero Text & Search */}
           <div className="lg:col-span-6 space-y-6">
@@ -32,7 +34,7 @@ export default async function HomePage() {
 
             <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.1]">
               Where timeless knowledge meets{" "}
-              <span className="text-primary italic">intelligence</span>.
+              <span className="shimmer-text italic">intelligence</span>.
             </h1>
 
             <p className="text-sm sm:text-base text-muted-foreground leading-relaxed max-w-xl">
@@ -85,31 +87,31 @@ export default async function HomePage() {
 
       {/* ─── Highlights / Stats Bar ─── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-6 rounded-3xl bg-card border border-border shadow-xs">
-          <div className="text-center p-3">
-            <div className="font-serif text-3xl font-bold text-foreground">40+</div>
-            <div className="text-xs text-muted-foreground mt-0.5">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-8 rounded-3xl bg-card border border-border shadow-sm">
+          <div className="text-center p-4 space-y-1.5">
+            <div className="font-serif text-4xl font-bold text-foreground">40+</div>
+            <div className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
               Curated Masterpieces
             </div>
           </div>
 
-          <div className="text-center p-3">
-            <div className="font-serif text-3xl font-bold text-primary">14 Days</div>
-            <div className="text-xs text-muted-foreground mt-0.5">
+          <div className="text-center p-4 space-y-1.5">
+            <div className="font-serif text-4xl font-bold text-primary">14 Days</div>
+            <div className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
               Standard Loan Period
             </div>
           </div>
 
-          <div className="text-center p-3">
-            <div className="font-serif text-3xl font-bold text-accent">100%</div>
-            <div className="text-xs text-muted-foreground mt-0.5">
-              Grounded AI (No Fake Titles)
+          <div className="text-center p-4 space-y-1.5">
+            <div className="font-serif text-4xl font-bold text-accent">100%</div>
+            <div className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+              Grounded AI · No Hallucinations
             </div>
           </div>
 
-          <div className="text-center p-3">
-            <div className="font-serif text-3xl font-bold text-foreground">Zero</div>
-            <div className="text-xs text-muted-foreground mt-0.5">
+          <div className="text-center p-4 space-y-1.5">
+            <div className="font-serif text-4xl font-bold text-foreground">0</div>
+            <div className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
               Extra Servers Needed
             </div>
           </div>
