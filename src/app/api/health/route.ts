@@ -25,21 +25,38 @@ export async function GET() {
   try {
     // Dynamically import to avoid env validation at build time
     const { Pool } = await import("@neondatabase/serverless");
-    const dbUrl = process.env.DATABASE_URL;
+    const dbUrl =
+      process.env.DATABASE_URL ||
+      process.env.POSTGRES_URL ||
+      process.env.POSTGRES_PRISMA_URL;
 
     if (!dbUrl) {
       status.services.database = {
         status: "error",
-        error: "DATABASE_URL not configured",
+        error: "DATABASE_URL or POSTGRES_URL not configured",
       };
       status.status = "degraded";
     } else {
-      const pool = new Pool({ connectionString: dbUrl });
-      const start = Date.now();
-      await pool.query("SELECT 1");
-      const latencyMs = Date.now() - start;
+      const isNeon =
+        dbUrl.includes("neon.tech") || dbUrl.includes("vercel-storage.com");
+      let latencyMs = 0;
+
+      if (isNeon) {
+        const pool = new Pool({ connectionString: dbUrl });
+        const start = Date.now();
+        await pool.query("SELECT 1");
+        latencyMs = Date.now() - start;
+        await pool.end();
+      } else {
+        const { Pool: PgPool } = await import("pg");
+        const pool = new PgPool({ connectionString: dbUrl });
+        const start = Date.now();
+        await pool.query("SELECT 1");
+        latencyMs = Date.now() - start;
+        await pool.end();
+      }
+
       status.services.database = { status: "ok", latencyMs };
-      await pool.end();
     }
   } catch (err) {
     status.services.database = {

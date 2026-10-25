@@ -20,13 +20,18 @@ const {
 } = schema;
 
 async function seed() {
-  const connectionString = process.env.DATABASE_URL;
+  const connectionString =
+    process.env.DATABASE_URL ||
+    process.env.POSTGRES_URL ||
+    process.env.POSTGRES_PRISMA_URL;
   if (!connectionString) {
-    console.error("❌ DATABASE_URL is required for seeding.");
+    console.error("❌ DATABASE_URL or POSTGRES_URL is required for seeding.");
     process.exit(1);
   }
 
-  const isNeon = connectionString.includes("neon.tech");
+  const isNeon =
+    connectionString.includes("neon.tech") ||
+    connectionString.includes("vercel-storage.com");
   const pool = isNeon
     ? new NeonPool({ connectionString })
     : new PgPool({ connectionString });
