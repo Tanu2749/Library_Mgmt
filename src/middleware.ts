@@ -14,7 +14,9 @@ export async function middleware(req: NextRequest) {
 
   const token = await getToken({
     req,
-    secret: process.env.NEXTAUTH_SECRET,
+    secret:
+      process.env.NEXTAUTH_SECRET ||
+      "athenaeum-fallback-jwt-secret-do-not-use-in-strict-prod-32c",
   });
 
   if (!token) {

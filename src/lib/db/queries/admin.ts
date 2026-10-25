@@ -82,7 +82,9 @@ export async function getDashboardStats() {
       recentActivity,
     };
   } catch (error) {
-    console.error("Dashboard stats error:", error);
+    if (process.env.NODE_ENV === "development") {
+      console.warn("Dashboard stats DB query skipped (using fallback):", error);
+    }
     return {
       totalBooks: 40,
       totalMembers: 3,

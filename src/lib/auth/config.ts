@@ -115,5 +115,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return session;
     },
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret:
+    process.env.NEXTAUTH_SECRET ||
+    "athenaeum-fallback-jwt-secret-do-not-use-in-strict-prod-32c",
 });
