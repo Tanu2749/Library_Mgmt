@@ -4,6 +4,7 @@ import * as dotenv from "dotenv";
 dotenv.config({ path: ".env" });
 
 const dbUrl =
+  process.env.DATABASE_URL_UNPOOLED ||
   process.env.DATABASE_URL ||
   process.env.POSTGRES_URL ||
   "postgresql://postgres:postgres@localhost:5432/athenaeum";
