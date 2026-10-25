@@ -1,0 +1,13 @@
+node_modules
+.next
+.git
+*.md
+.env
+.env.local
+.dockerignore
+docker-compose.yml
+tests
+scripts
+*.test.ts
+*.test.tsx
+*.spec.ts

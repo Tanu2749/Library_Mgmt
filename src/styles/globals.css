@@ -1,0 +1,174 @@
+@import "tailwindcss";
+
+/* ─── CSS Variables (HSL) ─── */
+:root {
+  --background: 40 25% 97%;
+  --foreground: 24 15% 12%;
+  --card: 40 20% 99%;
+  --card-foreground: 24 15% 12%;
+  --popover: 40 20% 99%;
+  --popover-foreground: 24 15% 12%;
+  --primary: 24 70% 45%;
+  --primary-foreground: 40 30% 98%;
+  --secondary: 35 15% 92%;
+  --secondary-foreground: 24 15% 25%;
+  --muted: 35 15% 92%;
+  --muted-foreground: 24 10% 45%;
+  --accent: 16 80% 55%;
+  --accent-foreground: 40 30% 98%;
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 35 15% 88%;
+  --input: 35 15% 88%;
+  --ring: 24 70% 45%;
+  --radius: 0.625rem;
+
+  /* Glassmorphism */
+  --glass-bg: rgba(255, 252, 245, 0.7);
+  --glass-border: rgba(200, 185, 160, 0.3);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+.dark {
+  --background: 222 30% 8%;
+  --foreground: 40 15% 92%;
+  --card: 222 25% 12%;
+  --card-foreground: 40 15% 92%;
+  --popover: 222 25% 12%;
+  --popover-foreground: 40 15% 92%;
+  --primary: 28 75% 55%;
+  --primary-foreground: 222 30% 8%;
+  --secondary: 222 20% 16%;
+  --secondary-foreground: 40 15% 85%;
+  --muted: 222 20% 16%;
+  --muted-foreground: 40 10% 55%;
+  --accent: 16 80% 60%;
+  --accent-foreground: 222 30% 8%;
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 222 20% 18%;
+  --input: 222 20% 18%;
+  --ring: 28 75% 55%;
+
+  /* Glassmorphism dark */
+  --glass-bg: rgba(15, 18, 30, 0.7);
+  --glass-border: rgba(60, 70, 100, 0.3);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* ─── Base ─── */
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: var(--font-body, "Inter", system-ui, sans-serif);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Heading font */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading, "Playfair Display", Georgia, serif);
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* ─── Selection ─── */
+::selection {
+  background: hsl(var(--primary) / 0.2);
+  color: hsl(var(--foreground));
+}
+
+/* ─── Focus ─── */
+:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+/* ─── Reduced motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ─── Glassmorphism utilities ─── */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+/* ─── Book card 3D tilt ─── */
+.book-card {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.book-card-inner {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.book-card:hover .book-card-inner {
+  transform: rotateY(-5deg) rotateX(3deg) scale(1.02);
+  box-shadow:
+    8px 8px 20px hsl(var(--primary) / 0.1),
+    -2px -2px 10px hsl(var(--primary) / 0.05);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .book-card:hover .book-card-inner {
+    transform: none;
+  }
+}
+
+/* ─── Skeleton loader ─── */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--muted)) 25%,
+    hsl(var(--muted-foreground) / 0.08) 50%,
+    hsl(var(--muted)) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+  border-radius: var(--radius);
+}
+
+@keyframes skeleton-pulse {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ─── Page transitions ─── */
+.page-enter {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
