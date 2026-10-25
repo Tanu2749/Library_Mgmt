@@ -20,45 +20,58 @@ export function HeroScene() {
         dpr={[1, 2]} // Cap pixel ratio at 2 for performance
         gl={{ antialias: true, alpha: true }}
       >
-        <ambientLight intensity={0.7} />
-        <directionalLight position={[5, 8, 5]} intensity={1.2} castShadow />
-        <pointLight position={[-4, 3, 2]} intensity={0.6} color="#d4af37" />
+        <ambientLight intensity={0.8} />
+        <directionalLight position={[5, 8, 5]} intensity={1.3} castShadow />
+        <directionalLight position={[0, 0, 6]} intensity={0.9} />
+        <pointLight position={[-4, 3, 2]} intensity={0.8} color="#d4af37" />
 
         <Suspense fallback={null}>
-          <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.5}>
+          <Float speed={1.5} rotationIntensity={0.15} floatIntensity={0.4}>
             {/* Book 1: Dune (Terracotta/Amber) */}
             <BookModel
               position={[-2.4, 0.2, 0]}
-              rotation={[0.1, 0.4, -0.05]}
-              color="#a4421d"
+              rotation={[0.08, 0.35, -0.04]}
+              color="#993617"
               title="Dune"
+              author="Frank Herbert"
+              subtitle="The Sci-Fi Epic"
+              emblem="dune"
               onClick={() => handleBookClick("Dune")}
             />
 
-            {/* Book 2: 1984 (Midnight Ink) */}
+            {/* Book 2: 1984 (Midnight Navy) */}
             <BookModel
               position={[-0.8, -0.1, 0.3]}
-              rotation={[-0.05, 0.1, 0.05]}
-              color="#1e293b"
+              rotation={[-0.04, 0.12, 0.04]}
+              color="#131d2e"
               title="1984"
+              author="George Orwell"
+              subtitle="Dystopian Classic"
+              emblem="1984"
               onClick={() => handleBookClick("1984")}
             />
 
-            {/* Book 3: Sapiens (Warm Ochre) */}
+            {/* Book 3: Sapiens (Warm Cognac) */}
             <BookModel
-              position={[0.8, 0.3, -0.2]}
-              rotation={[0.1, -0.2, -0.05]}
-              color="#b45309"
+              position={[0.8, 0.25, -0.2]}
+              rotation={[0.08, -0.2, -0.04]}
+              color="#78350f"
               title="Sapiens"
+              author="Yuval N. Harari"
+              subtitle="History of Humankind"
+              emblem="sapiens"
               onClick={() => handleBookClick("Sapiens")}
             />
 
-            {/* Book 4: Foundation (Deep Forest/Bronze) */}
+            {/* Book 4: Foundation (Deep Imperial Emerald) */}
             <BookModel
               position={[2.4, -0.2, 0.1]}
-              rotation={[-0.1, -0.4, 0.1]}
-              color="#1e3a2b"
+              rotation={[-0.08, -0.35, 0.08]}
+              color="#064e3b"
               title="Foundation"
+              author="Isaac Asimov"
+              subtitle="Galactic Empire"
+              emblem="foundation"
               onClick={() => handleBookClick("Foundation")}
             />
           </Float>
