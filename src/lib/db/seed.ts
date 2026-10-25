@@ -144,9 +144,13 @@ async function seed() {
   console.log(`  ✓ ${insertedAuthors.length} authors created`);
 
   // ─── Books ───
-  // Cover URL generator using a deterministic placeholder
-  const cover = (title: string) =>
-    `https://placehold.co/400x600/1a1a2e/e0d5c1?text=${encodeURIComponent(title.split(" ").slice(0, 3).join("\n"))}&font=playfair-display`;
+  // High-res Open Library cover by ISBN (with fallback)
+  const cover = (title: string, isbn?: string) =>
+    isbn
+      ? `https://covers.openlibrary.org/b/isbn/${isbn}-L.jpg`
+      : `https://placehold.co/400x600/1a1a2e/e0d5c1?text=${encodeURIComponent(
+          title.split(" ").slice(0, 3).join("\n")
+        )}&font=playfair-display`;
 
   const bookData: {
     title: string;
@@ -760,6 +764,9 @@ async function seed() {
   // Insert books
   for (const book of bookData) {
     const { authorNames, genreSlugs, ...bookValues } = book;
+    if (bookValues.isbn) {
+      bookValues.coverUrl = cover(bookValues.title, bookValues.isbn);
+    }
 
     const [insertedBook] = await db
       .insert(books)

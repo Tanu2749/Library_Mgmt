@@ -139,11 +139,15 @@ export function Footer() {
         <div className="border-t border-border/40 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
           <p>© {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
           <div className="flex items-center gap-4">
-            <Link href="/api/health" className="hover:text-primary transition-colors font-mono">
-              /api/health
+            <Link href="/about" className="hover:text-primary transition-colors">
+              About & Rules
             </Link>
             <span className="text-border">•</span>
-            <span>Zero-serverless deployment</span>
+            <Link href="/catalog" className="hover:text-primary transition-colors">
+              Browse Collection
+            </Link>
+            <span className="text-border">•</span>
+            <span className="text-foreground/60">Digital Reading Room</span>
           </div>
         </div>
       </div>
